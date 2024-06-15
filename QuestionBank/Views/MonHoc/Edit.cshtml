@@ -1,0 +1,53 @@
+﻿@model QuestionBank.Models.MonHoc
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<div class="container-form">
+    <div class="header-section">
+        <h1>Chỉnh Sửa Thông Tin Môn Học</h1>
+       
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col-md-12">
+            <form asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="MaMonHoc" />
+                <div class="form-group">
+                    <label asp-for="MaKhoa" class="control-label">Khoa</label>
+                    <select asp-for="MaKhoa" class="form-control" asp-items="ViewBag.MaKhoa"></select>
+                    <span asp-validation-for="MaKhoa" class="text-danger"></span>
+                </div>
+                <div class="form-group" hidden>
+                    <label asp-for="MaSoMonHoc" class="control-label">Mã Số Môn Học</label>
+                    <input asp-for="MaSoMonHoc" class="form-control" />
+                    <span asp-validation-for="MaSoMonHoc" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="TenMonHoc" class="control-label">Tên Môn Học</label>
+                    <input asp-for="TenMonHoc" class="form-control" />
+                    <span asp-validation-for="TenMonHoc" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="XoaTamMonHoc" class="control-label">Trạng Thái</label>
+                    <select asp-for="XoaTamMonHoc" class="form-control">
+                        <option value="true">True</option>
+                        <option value="false">False</option>
+                    </select>
+                    <span asp-validation-for="XoaTamMonHoc" class="text-danger"></span>
+                </div>
+                <div style="margin-top: 10px" class="form-group text-center">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="mt-3">
+        <a asp-action="Index" class="btn btn-secondary">Trở Về</a>
+    </div>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

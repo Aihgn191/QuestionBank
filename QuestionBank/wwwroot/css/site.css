@@ -1,0 +1,131 @@
+/* custom-styles.css */
+
+html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    margin-bottom: 60px;
+}
+
+.avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+    .avatar img {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+
+.navbar-nav .nav-link {
+    color: #000;
+    font-weight: bold;
+}
+
+    .navbar-nav .nav-link:hover {
+        color: #0056b3;
+    }
+
+.navbar-toggler {
+    border: none;
+}
+
+.red-btn {
+    background-color: #ff4b5a;
+    border-color: #ff4b5a;
+}
+
+    .red-btn:hover {
+        background-color: #e04350;
+        border-color: #e04350;
+    }
+
+footer {
+    padding: 10px 0;
+    background-color: #f8f9fa;
+}
+
+.sidebar {
+    width: 100%; /* Full width for mobile */
+    padding: 15px;
+    background-color: #f8f9fa;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+    .sidebar h1 {
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+
+    .sidebar ul {
+        list-style-type: none;
+        padding-left: 0;
+    }
+
+        .sidebar ul li {
+            margin-bottom: 10px;
+        }
+
+            .sidebar ul li a {
+                font-size: 16px;
+                text-decoration: none;
+                display: block; /* Ensure full width is clickable */
+            }
+
+.content-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.table thead th {
+    background-color: #007bff;
+    color: white;
+}
+
+.table tbody tr:nth-child(odd) {
+    background-color: #f8f9fa;
+}
+
+.table td {
+    vertical-align: middle;
+}
+
+.btn-primary, .btn-danger, .btn-info {
+    margin-right: 5px; /* Space between buttons */
+    min-width: 80px;
+}
+
+@media (min-width: 768px) {
+    .sidebar {
+        width: 250px; /* Fixed width for larger screens */
+    }
+}
+.container-form {
+    max-width: 600px;
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}

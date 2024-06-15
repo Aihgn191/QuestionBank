@@ -1,0 +1,12 @@
+﻿@model QuestionBank.Models.CauHoi
+
+<h1 style="text-align:center">Chọn cách thức thêm câu hỏi</h1>
+<main class="container">
+    <div style="height: 20vh" class="d-flex justify-content-center align-items-center"> 
+        <a asp-action="Create" class="btn btn-primary mx-2">Nhập câu hỏi thủ công</a>
+        <a asp-action="QuesFromFile" class="btn btn-success mx-2">Thêm file câu hỏi</a>
+    </div>
+</main>
+<div class="mt-3">
+    <a asp-action="Index" class="btn btn-secondary">Trở về</a>
+</div>

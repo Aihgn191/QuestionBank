@@ -1,0 +1,37 @@
+﻿@model List<DeThiDetail>
+
+@{
+    ViewData["Title"] = "Chi Tiết Câu Hỏi";
+}
+@{
+    var i = 0;
+}
+<style>
+    p {
+        display: inline-block;
+        margin: 0;
+        vertical-align: top;
+    }
+
+    /* span {
+            vertical-align: top;
+        } */
+</style>
+<h2 style="text-align:center">Đề thi môn</h2>
+
+@foreach (var item in Model)
+{
+        <span> <strong>Câu @i:</strong> @Html.Raw(item.CauHoi)</span>
+        <br />
+        <span><strong>A:</strong> <span style="color:@(item.DapAn == "A" ? "red" : "black")">@item.DAA</span></span>
+        <br />
+         <span><strong>B:</strong> <span style="color:@(item.DapAn == "B"? "red" : "black")">@item.DAB</span></span>
+        <br />
+    <span><strong>C:</strong> <span style="color:@(item.DapAn == "C"  ? "red" : "black")">@item.DAC</span></span>
+        <br />
+    <span><strong>D:</strong> <span style="color:@(item.DapAn == "D" ? "red" : "black")">@item.DAD</span></span>
+        i = i + 1;
+    <br />
+
+}
+<a  asp-controller="CauHoi" asp-action="SaveToDatabase" class="btn btn-success mx-2">Lưu vào Database</a>

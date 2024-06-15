@@ -1,0 +1,133 @@
+﻿@model QuestionBank.Models.CauHoi
+
+@{
+    ViewData["Title"] = "Delete";
+}
+@{
+    var CTL = ViewBag.CauTraLoi as List<CauTraLoi>;
+    var A = "";
+    var B = "";
+    var C = "";
+    var D = "";
+    var DAD = "";
+    foreach (var item in CTL)
+    {
+        if (item.LaDapAn)
+        {
+            DAD = item.NoiDung;
+        }
+        switch (item.ThuTu)
+        {
+            case 1:
+                A = item.NoiDung;
+                break;
+            case 2:
+                B = item.NoiDung;
+                break;
+            case 3:
+                C = item.NoiDung;
+                break;
+            case 4:
+                D = item.NoiDung;
+                break;
+            default:
+                break;
+        }
+
+    }
+}
+
+<h3>Bạn có chắc chắn là muốn xóa câu hỏi này không</h3>
+<div>
+    <h4>CauHoi</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            Câu Hỏi
+        </dt>
+        <dd class="col-sm-10">
+            @Html.Raw(Model.NoiDung)
+        </dd>
+        <dt class="col-sm-2">
+            Đáp Án A
+        </dt>
+        <dd class="col-sm-10">
+            @A
+        </dd>
+        <dt class="col-sm-2">
+            Đáp Án B
+        </dt>
+        <dd class="col-sm-10">
+            @B
+        </dd>
+        <dt class="col-sm-2">
+            Đáp Án C
+        </dt>
+        <dd class="col-sm-10">
+            @C
+        </dd>
+        <dt class="col-sm-2">
+            Đáp Án D
+        </dt>
+        <dd class="col-sm-10">
+            @D
+        </dd>
+        <dt class="col-sm-2">
+            Đáp Án Đúng
+        </dt>
+        <dd class="col-sm-10">
+            @DAD
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.HoanVi)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.HoanVi)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CapDo)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CapDo)
+        </dd>
+        <dt class="col-sm-2">
+            Trạng thái
+        </dt>
+        <dd class="col-sm-10">
+            @{
+                if (Model.XoaTamCauHoi == true)
+                {
+                    <p class="btn btn-danger">Đang chờ duyệt</p>
+                }
+                else
+                {
+                    <p class="btn btn-success">Đã được duyệt</p>
+                }
+            }
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.NgayTao)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.NgayTao)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.NgaySua)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.NgaySua)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.MaPhanNavigation.MaMonHocNavigation.TenMonHoc)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.MaPhanNavigation.MaMonHocNavigation.TenMonHoc)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="MaCauHoi" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> 
+        <a class="btn btn-primary" asp-area="Admin" asp-action="ACauHoi" asp-action="Index">Quay về</a>
+    </form>
+</div>

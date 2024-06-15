@@ -1,0 +1,50 @@
+﻿@model List<DeThiDetail>
+
+@{
+    ViewData["Title"] = "Details";
+}
+@{
+    var i = 0;
+}
+<style>
+    p{
+        display: inline-block;
+        margin: 0;
+        vertical-align: top;
+    }
+
+    /* span {
+        vertical-align: top;
+    } */
+</style>
+<h2 style ="text-align:center">Đề thi môn @ViewBag.monhoc</h2>
+
+@foreach (var item in Model)
+{
+    i = i + 1;
+    <span> <strong>Câu @i:</strong> @Html.Raw(item.CauHoi)</span>
+
+
+
+
+
+    <br />
+    <span><strong>A:</strong> @item.DAA </span>
+    <br />
+
+    <span>
+        <strong>B:</strong> @item.DAB
+    </span>
+
+    <br />
+    <span>
+        <strong>C:</strong> @item.DAC
+    </span>
+
+    <br />
+    <span>
+        <strong>D:</strong> @item.DAD
+    </span>
+    <br />
+    
+}

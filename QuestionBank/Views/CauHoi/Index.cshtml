@@ -1,0 +1,89 @@
+﻿@model IEnumerable<QuestionBank.Models.CauHoi>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+
+<p>
+    <a class="btn btn-primary" asp-action="Choose">Thêm câu hỏi</a>
+    <button class="btn btn-warning" id="filter-pending">Câu hỏi đang chờ duyệt</button>
+</p>
+<table class="table table-striped table-hover">
+    <thead class="thead-dark">
+        <tr>
+            <th>Mã Số Câu Hỏi</th>
+            <th>Môn Học</th>
+            <th>Tên Phần</th>
+            <th>Hoán vị</th>
+            <th>CLO</th>
+            <th>Ngày Tạo</th>
+            <th>Ngày Sửa</th>
+            <th>Trạng thái</th>
+            <th>Chức năng</th>
+        </tr>
+    </thead>
+    <tbody id="question-list">
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.MaSoCauHoi)</td>
+                <td>@item.MaPhanNavigation.MaMonHocNavigation.TenMonHoc</td>
+                <td>@Html.DisplayFor(modelItem => item.MaPhanNavigation.TenPhan)</td>
+                <td>@Html.DisplayFor(modelItem => item.HoanVi)</td>
+                <td>@Html.DisplayFor(modelItem => item.CloId)</td>
+                <td>@Html.DisplayFor(modelItem => item.NgayTao)</td>
+                <td>@Html.DisplayFor(modelItem => item.NgaySua)</td>
+                <td>
+                    @{
+                        if (item.XoaTamCauHoi == true)
+                        {
+                            <span class="badge bg-primary">Đang chờ duyệt</span>
+                        }
+                        else if (item.XoaTamCauHoi == false)
+                        {
+                            <span class="badge bg-success">Đã được duyệt</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-danger">Đã bị từ chối</span>
+                        }
+                    }
+                </td>
+                <td>
+                    <a class="btn btn-info btn-sm" asp-action="Details" asp-route-id="@item.MaCauHoi">Xem</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script>
+    let i = 0;
+    document.getElementById('filter-pending').addEventListener('click', function () {
+        const rows = document.querySelectorAll('#question-list tr');
+        if (i === 0) {
+            rows.forEach(row => {
+                const status = row.querySelector('.badge').textContent.trim();
+                if (status === 'Đang chờ duyệt') {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+            this.textContent = 'Tất cả câu hỏi';
+            i = 1;
+        } else {
+            rows.forEach(row => {
+                row.style.display = '';
+            });
+            this.textContent = 'Câu hỏi đang chờ duyệt';
+            i = 0;
+        }
+    });
+</script>
+
+
+
+

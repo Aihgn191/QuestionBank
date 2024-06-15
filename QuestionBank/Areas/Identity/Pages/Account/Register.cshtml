@@ -1,0 +1,60 @@
+﻿@page
+@model RegisterModel
+@{
+    ViewData["Title"] = "Register";
+}
+<link rel="stylesheet" href="~/hutech.css">
+<body class="text-center">
+    <div class="form-signin" id="loginBox">
+        <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+            <img class="mb-4" width="250px" src="https://erp1.hutech.edu.vn/assets/png/logo.png" alt="logo">
+            <div id="abc"></div>
+            <label class="h6 mb-3 fw-bold" style="text-align: left;">Đăng ký tài khoản</label>
+            <hr>
+
+            <div class="form-floating">
+                <input asp-for="Input.FullName" class="form-control" autocomplete="FullName" aria-required="true" placeholder="Nguyen Thanh Tuoi" />
+                <label>FullName</label>
+                <span asp-validation-for="Input.FullName" class="text-danger"></span>
+            </div>
+            <div class="form-floating">
+                <input asp-for="Input.UserName" class="form-control" autocomplete="UserName" aria-required="true" placeholder="ThanhTuoi" />
+                <label>Username</label>
+                <span asp-validation-for="Input.UserName" class="text-danger"></span>
+                <div class="input-line"></div>
+            </div>
+            <div class="form-floating">
+                <input asp-for="Input.Email" class="form-control" autocomplete="email" aria-required="true" placeholder="name@example.com" />
+                <label>Email</label>
+                <span asp-validation-for="Input.Email" class="text-danger"></span>
+            </div>
+            <div class="form-floating">
+                
+                <select asp-for="Input.Khoa" asp-items="@Model.ListKhoa" class="form-control"></select>
+                <span asp-validation-for="Input.Khoa" class="text-danger"></span>
+            </div>
+            <div class="form-floating">
+                
+                <select asp-for="Input.Role" asp-items="@Model.ListRoles" class="form-control"></select>
+                <span asp-validation-for="Input.Role" class="text-danger"></span>
+
+            </div>
+            <div class="form-floating">
+
+                <input asp-for="Input.Address" class="form-control" autocomplete="Address" aria-required="true" placeholder="Duong 123 Nguyen Trai" />
+                <label>Address</label>
+                <span asp-validation-for="Input.Address" class="text-danger"></span>
+            </div>
+            <div class="register-link">
+                <p>I have an account <a asp-page="./Login" asp-route-returnUrl="@Model.ReturnUrl">Login</a></p>
+            </div>
+            <button class="w-100 btn btn-lg btn-primary mt-3" type="submit">Register</button>
+        </form>
+    </div>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</body>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

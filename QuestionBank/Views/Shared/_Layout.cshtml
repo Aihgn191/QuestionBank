@@ -1,0 +1,158 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<CustomUser> SignInManager
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - ProjectCS</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/ProjectCS.styles.css" asp-append-version="true" />
+    <script src="https://cdn.tiny.cloud/1/gnlckgyovo9un5nh5up9vhaxnwqyj0utza9hvk5bbvv8yv7b/tinymce/7/tinymce.min.js"
+        referrerpolicy="origin"></script>
+    <script>
+        tinymce.init({
+            selector: '#mytextarea'
+        });
+    </script>
+    <style>
+        
+
+        
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container">
+                <a class="navbar-brand" href="#home">
+                    <img src="https://file1.hutech.edu.vn/file/editor/homepage/stories/hinh34/logo%20CMYK-01.png" alt="top logo" height="100px" width="300" class="logo">
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#basic-navbar-nav"
+                    aria-controls="basic-navbar-nav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="basic-navbar-nav">
+                    <ul class="navbar-nav mx-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Trang chủ</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Khoa" asp-action="Index">Ngân Hàng Đề Thi</a>
+                        </li>
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="Admin" asp-controller="ACauHoi" asp-action="Index">Câu Hỏi</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="Admin" asp-controller="DeThis" asp-action="Index"> Đề Thi</a>
+                            </li>
+                        }
+                        @if (User.IsInRole("Manager"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="Admin" asp-controller="Users" asp-action="Index">Người Dùng</a>
+                            </li>
+                        }
+                        <li class="nav-item">
+                            <a class="nav-link" href="https://lms.hutech.edu.vn/about">Về Chúng tôi</a>
+                        </li>
+                        @* <li class="nav-item d-lg-none">
+                            <a class="nav-link" href="https://apps.lms.hutech.edu.vn/home/faq?role=student">FAQ</a>
+                        </li> *@
+                    </ul>
+                    <ul class="navbar-nav">
+                        @* <li class="nav-item d-none d-lg-block">
+                            <a class="nav-link btn btn-danger red-btn" href="https://apps.lms.hutech.edu.vn/home/faq?role=student">FAQ</a>
+                        </li> *@
+                        @if (SignInManager.IsSignedIn(User))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link btn btn-info" asp-area="" asp-controller="UserInfo" asp-action="Index">Xin chào @User.Identity?.Name!</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link btn btn-danger red-btn ms-lg-2" asp-area="Identity" asp-page="/Account/Logout"
+                                    asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">Logout</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link btn btn-danger red-btn ms-lg-2" asp-area="Identity" asp-page="/Account/Login">Đăng nhập</a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <hr />
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2024 - Nguyễn Thanh Tươi
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+
+</html>
+
+@* <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container-fluid">
+                @if (!SignInManager.IsSignedIn(User))
+                {
+                    <a class="navbar-brand" asp-area="Identity" asp-page="/Account/Login">HutechQuestionBank</a>
+                }
+                else
+                {
+                    <a class="navbar-brand" asp-area="" asp-controller="Khoa" asp-action="Index">HutechQuestionBank</a>
+                }
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        @if (!SignInManager.IsSignedIn(User))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Quản Lý Ngân Hàng</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Khoa" asp-action="Index">Quản Lý Ngân Hàng</a>
+                            </li>
+                            @if (User.IsInRole("Admin"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="Admin" asp-controller="AcauHoi" asp-action="Index">Quản Lý Đề Thi</a>
+                                </li>
+                            }
+                            @if (User.IsInRole("Manager"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="Admin" asp-controller="Users" asp-action="Index">Quản Lý User</a>
+                                </li>
+                            }
+                        }
+
+                    </ul>
+                    <partial name="_LoginPartial" />
+                </div>
+            </div>
+        </nav> *@

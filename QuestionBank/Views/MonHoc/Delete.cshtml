@@ -1,0 +1,31 @@
+﻿@model QuestionBank.Models.MonHoc
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<div class="container-form">
+    <div class="header-section">
+        <h1>Delete</h1>
+        <h3>Bạn có chắc muốn xóa Môn Học này không?</h3>
+    </div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-3">Mã Số Môn Học</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.MaSoMonHoc)</dd>
+        <dt class="col-sm-3">Tên Môn Học</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.TenMonHoc)</dd>
+        <dt class="col-sm-3">Trạng Thái</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.XoaTamMonHoc)</dd>
+        <dt class="col-sm-3">Khoa</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.MaKhoaNavigation.TenKhoa)</dd>
+    </dl>
+
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="MaMonHoc" />
+        <input type="submit" value="Xóa Môn Học" class="btn btn-danger" />
+    </form>
+    <div class="mt-3">
+        <a asp-action="Index" class="btn btn-secondary">Trở Về</a>
+    </div>
+</div>

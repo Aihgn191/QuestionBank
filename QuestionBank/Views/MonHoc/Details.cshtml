@@ -1,0 +1,29 @@
+﻿@model QuestionBank.Models.MonHoc
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div class="container-form">
+    <div class="header-section">
+        <h1>Chi Tiết Môn Học</h1>
+        
+    </div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-3">Mã Số Môn Học</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.MaSoMonHoc)</dd>
+        <dt class="col-sm-3">Tên Môn Học</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.TenMonHoc)</dd>
+        <dt class="col-sm-3">Trạng Thái</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.XoaTamMonHoc)</dd>
+        <dt class="col-sm-3">Khoa</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.MaKhoaNavigation.TenKhoa)</dd>
+    </dl>
+    <div >
+        <a asp-action="Edit" asp-route-id="@Model?.MaMonHoc" class="btn btn-primary">Sửa</a>
+    </div>
+    <div class="mt-3">
+        <a asp-action="Index" class="btn btn-secondary">Trở về</a>
+    </div>
+</div>

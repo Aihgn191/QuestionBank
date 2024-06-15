@@ -1,0 +1,91 @@
+﻿@model QuestionBank.Models.CauHoi
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div class="container-form">
+    <div class="header-section">
+        <h1>Tạo Câu Hỏi</h1>
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col-md-12">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="form-group">
+                    <label asp-for="MaPhan" class="control-label">Mã Phần</label>
+                    <select asp-for="MaPhan" class="form-control" asp-items="ViewBag.MaPhan"></select>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="CloId" class="control-label">CLO</label>
+                    <select asp-for="CloId" class="form-control" asp-items="ViewBag.Clos"></select>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="NoiDung" class="control-label">Nội Dung</label>
+                    <textarea asp-for="NoiDung" class="form-control" id="mytextarea"></textarea>
+                    <span asp-validation-for="NoiDung" class="text-danger"></span>
+                </div>
+
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="HoanVi" /> @Html.DisplayNameFor(model => model.HoanVi)
+                    </label>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label">Đáp án A</label>
+                    <input name="DAA" class="form-control" />
+                    <span class="text-danger"></span>
+                    <input type="checkbox" name="dapAnDung[]" class="form-check-input" value="DAA" /> Đúng
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label">Đáp án B</label>
+                    <input name="DAB" class="form-control" />
+                    <span class="text-danger"></span>
+                    <input type="checkbox" name="dapAnDung[]" class="form-check-input" value="DAB" /> Đúng
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label">Đáp án C</label>
+                    <input name="DAC" class="form-control" />
+                    <span class="text-danger"></span>
+                    <input type="checkbox" name="dapAnDung[]" class="form-check-input" value="DAC" /> Đúng
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label">Đáp án D</label>
+                    <input name="DAD" class="form-control" />
+                    <span class="text-danger"></span>
+                    <input type="checkbox" name="dapAnDung[]" class="form-check-input" value="DAD" /> Đúng
+                </div>
+
+                <div style="margin-top: 10px" class="form-group text-center">
+                    <input type="submit" value="Tạo" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="mt-3">
+        <a asp-action="Choose" class="btn btn-secondary">Trở về</a>
+    </div>
+</div>
+
+
+
+@* <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('.dapAnDung').click(function () {
+            $('.dapAnDung').not(this).prop('checked', false);
+        });
+    });
+</script> *@
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

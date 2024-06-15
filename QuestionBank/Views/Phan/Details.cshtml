@@ -1,0 +1,48 @@
+﻿@model QuestionBank.Models.Phan
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div class="container-form">
+    <div class="header-section">
+        <h1>Chi Tiết Phần</h1>
+    </div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-3">Tên Phần</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.TenPhan)</dd>
+
+        <dt class="col-sm-3">Nội Dung</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.NoiDung)</dd>
+
+        <dt class="col-sm-3">Thứ Tự</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.ThuTu)</dd>
+
+        <dt class="col-sm-3">Số Lượng Câu Hỏi</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.SoLuongCauHoi)</dd>
+
+        @* <dt class="col-sm-3">@Html.DisplayNameFor(model => model.MaPhanCha)</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.MaPhanCha)</dd> *@
+
+        <dt class="col-sm-3">Mã Số Phần</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.MaSoPhan)</dd>
+
+        <dt class="col-sm-3">Trạng thái</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.XoaTamPhan)</dd>
+
+        <dt class="col-sm-3">Câu Hỏi Nhóm</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.LaCauHoiNhom)</dd>
+
+        <dt class="col-sm-3">Tên Môn Học</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.MaMonHocNavigation.TenMonHoc)</dd>
+    </dl>
+
+    <div>
+        <a asp-action="Edit" asp-route-id="@Model?.MaPhan" class="btn btn-primary">Sửa</a>
+    </div>
+    <div class="mt-3">
+        <a asp-action="Index" class="btn btn-secondary">Trở Về</a>
+    </div>
+</div>
+

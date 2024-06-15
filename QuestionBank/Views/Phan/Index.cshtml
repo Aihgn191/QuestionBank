@@ -1,0 +1,79 @@
+﻿@model IEnumerable<QuestionBank.Models.Phan>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+<div class="container" style="max-width:auto;">
+    <div class="row">
+        <div class="col-sm-3">
+            <!-- 30% content -->
+            <div class="sidebar">
+                <h1>Quản lý</h1>
+                <ul>
+                    <li><a class="btn btn-primary" asp-controller="MonHoc" asp-action="Index">Quản lý môn học</a></li>
+                    <li><a class="btn btn-primary" asp-controller="CauHoi" asp-action="Index">Quản lý câu hỏi</a></li>
+                </ul>
+            </div>
+            
+            
+        </div>
+        <div class="col-sm-9">
+            <div class="content-header">
+                <h2>Danh sách học phần</h2>
+                <a class="btn btn-primary" asp-action="Create">Thêm Học Phần</a>
+            </div>
+            
+            <div class="rounded-columns">
+
+                @* <a style="font-size: 20px" asp-action="Create">Thêm mới</a> *@
+                <div class="row">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Tên phần</th>
+                                
+                                <th>Mã phần</th>
+                                <th>Trạng Thái (Không Sử Dụng)</th>
+                                <th>Câu hỏi nhóm</th>
+                                <th>Tên môn học</th>
+                                <th style="padding-left:100px">Chức năng</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.TenPhan)
+                                    </td>
+                                    
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.MaSoPhan)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.XoaTamPhan)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.LaCauHoiNhom)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.MaMonHocNavigation.TenMonHoc)
+                                    </td>
+                                    <td>
+
+                                        <a class="btn btn-primary" asp-action="Edit" asp-route-id="@item.MaPhan">Sửa</a> 
+                                        <a class="btn btn-primary" asp-action="Details" asp-route-id="@item.MaPhan">Xem</a> 
+                                        <a class ="btn btn-danger" asp-action="Delete" asp-route-id="@item.MaPhan">Xóa</a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

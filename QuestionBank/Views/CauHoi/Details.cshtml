@@ -1,0 +1,111 @@
+﻿@model QuestionBank.Models.CauHoi
+
+@{
+    ViewData["Title"] = "Details";
+}
+@{
+    var CTL = ViewBag.CauTraLoi as List<CauTraLoi>;
+    var A = "";
+    var B = "";
+    var C = "";
+    var D = "";
+    var DAD = "";
+    foreach (var item in CTL)
+    {
+        switch (item.ThuTu)
+        {
+            case 1:
+                A = item.NoiDung;
+                break;
+            case 2:
+                B = item.NoiDung;
+                break;
+            case 3:
+                C = item.NoiDung;
+                break;
+            case 4:
+                D = item.NoiDung;
+                break;
+            default:
+                break;
+        }
+
+    }
+}
+<div class="container-form">
+    <div class="header-section">
+        <h1>Chi Tiết Câu Hỏi</h1>
+    </div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-3">Câu Hỏi</dt>
+        <dd class="col-sm-9">@Html.Raw(Model.NoiDung)</dd>
+
+        <dt class="col-sm-3">Đáp Án A</dt>
+        <dd class="col-sm-9">@A</dd>
+
+        <dt class="col-sm-3">Đáp Án B</dt>
+        <dd class="col-sm-9">@B</dd>
+
+        <dt class="col-sm-3">Đáp Án C</dt>
+        <dd class="col-sm-9">@C</dd>
+
+        <dt class="col-sm-3">Đáp Án D</dt>
+        <dd class="col-sm-9">@D</dd>
+
+        @foreach (var item in CTL)
+        {
+            if (item.LaDapAn)
+            {
+                <dt class="col-sm-3">Đáp Án Đúng</dt>
+                <dd class="col-sm-9">@item.NoiDung</dd>
+            }
+        }
+
+        <dt class="col-sm-3">Hoán Vị</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.HoanVi)</dd>
+
+        <dt class="col-sm-3">CLO</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.CloId)</dd>
+
+        <dt class="col-sm-3">Trạng Thái</dt>
+        <dd class="col-sm-9">
+            @{
+                if (Model.XoaTamCauHoi == true)
+                {
+                    <span class="badge bg-warning">Đang chờ duyệt</span>
+                }
+                else if (Model.XoaTamCauHoi == false)
+                {
+                    <span class="badge bg-success">Đã được duyệt</span>
+                }
+                else
+                {
+                    <span class="badge bg-danger">Đã bị từ chối</span>
+                }
+            }
+        </dd>
+
+        <dt class="col-sm-3">Ngày Tạo</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.NgayTao)</dd>
+
+        <dt class="col-sm-3">Ngày Sửa</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.NgaySua)</dd>
+
+        <dt class="col-sm-3">Môn Học</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.MaPhanNavigation.MaMonHocNavigation.TenMonHoc)</dd>
+    </dl>
+
+    <div>
+        @if (User.IsInRole("Admin"))
+        {
+            <a class="btn btn-primary" asp-area="Admin" asp-controller="ACauHoi" asp-action="Index">Trở Về</a>
+            <a class="btn btn-success" asp-area="Admin" asp-controller="ACauHoi" asp-action="AcceptCH" asp-route-id="@Model?.MaCauHoi">Duyệt</a>
+        }
+        else
+        {
+            <a class="btn btn-secondary" asp-action="Index">Trở Về</a>
+        }
+    </div>
+</div>
+

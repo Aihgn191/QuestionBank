@@ -1,0 +1,28 @@
+﻿@model QuestionBank.Models.Khoa
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div class="container-form">
+    <div class="header-section">
+        <h1>Chi Tiết Khoa</h1>
+        
+    </div>
+    <hr />
+    <dl class="row">
+        @* <dt class="col-sm-2">@Html.DisplayNameFor(model => model.TenKhoa)</dt> *@
+        <dt class="col-sm-3"> Tên Khoa</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.TenKhoa)</dd>
+        <dt class="col-sm-3"> Trạng Thái</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.XoaTamKhoa)</dd>
+    </dl>
+    <div >
+        <a asp-action="Edit" asp-route-id="@Model?.MaKhoa" class="btn btn-primary">Sửa</a>
+        
+    </div>
+    <div class="mt-3">
+        
+        <a asp-action="Index" class="btn btn-secondary">Trở Về</a>
+    </div>
+</div>

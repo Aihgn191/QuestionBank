@@ -1,0 +1,151 @@
+﻿@model IEnumerable<QuestionBank.Models.MaTran>
+<h1>Tạo Ma Trận Đề Thi</h1>
+<h3>Môn @ViewBag.Monhoc</h3>
+@* <a class="btn btn-primary" asp-action="Create" asp-route-id="@ViewBag.Id">Tạo ma trận</a> *@
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TenPhan)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SoCauHoi)
+            </th>
+            <th>
+                Clo1
+            </th>
+            <th>
+                Clo2
+            </th>
+            <th>
+                Clo3
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TenPhan)
+                </td>
+                <td>
+                    <label onclick="showInput('SoCauHoi_@item.MaPhan')">@item.SoCauHoi</label>
+                    <input hidden type="number" id="SoCauHoi_@item.MaPhan" class="short-input" style="width:50px;"
+                           onchange="updateSession('@item.MaPhan', 'SoCauHoi', this.value)" value="@item.SoCauHoi" oninput="validateInput(this)" onblur="hideInput('SoCauHoi_@item.MaPhan')" />
+                </td>
+                <td>
+                    <label onclick="showInput('Clo1_@item.MaPhan')">@item.Clo1</label>
+                    <input hidden type="number" id="Clo1_@item.MaPhan" class="short-input" style="width:50px;"
+                           onchange="updateSession('@item.MaPhan', 'Clo1', this.value)" value="@item.Clo1" oninput="validateInput(this)" onblur="hideInput('Clo1_@item.MaPhan')" />
+                </td>
+                <td>
+                    <label onclick="showInput('Clo2_@item.MaPhan')">@item.Clo2</label>
+                    <input hidden type="number" id="Clo2_@item.MaPhan" class="short-input" style="width:50px;"
+                           onchange="updateSession('@item.MaPhan', 'Clo2', this.value)" value="@item.Clo2" oninput="validateInput(this)" onblur="hideInput('Clo2_@item.MaPhan')" />
+                </td>
+                <td>
+                    <label onclick="showInput('Clo3_@item.MaPhan')">@item.Clo3</label>
+                    <input hidden type="number" id="Clo3_@item.MaPhan" class="short-input" style="width:50px;"
+                           onchange="updateSession('@item.MaPhan', 'Clo3', this.value)" value="@item.Clo3" oninput="validateInput(this)" onblur="hideInput('Clo3_@item.MaPhan')" />
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div> <a class="btn btn-primary" asp-action="RutTrichDeThi" asp-route-id="@ViewBag.Id">Rút trích đề thi</a></div>
+
+<div class="mt-3">
+    <a class="btn btn-secondary" asp-controller="MonHoc" asp-area="" asp-action="Index">Trở về</a>
+</div>
+
+@section Scripts {
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        function validateInput(input) {
+            if (input.value < 0) {
+                var originalValue = input.getAttribute('data-original-value');
+                if (originalValue !== null) {
+                    input.value = originalValue;
+                } else {
+                    input.value = '';
+                }
+                alert("Giá trị không được nhỏ hơn 0");
+                return;
+            }
+
+            // Lấy ra số câu hỏi đã nhập cho Clo1, Clo2 và Clo3
+            var maPhan = input.id.split('_')[1];
+            var clo1 = parseInt($('#Clo1_' + maPhan).val());
+            var clo2 = parseInt($('#Clo2_' + maPhan).val());
+            var clo3 = parseInt($('#Clo3_' + maPhan).val());
+
+            // Lấy ra tổng số câu hỏi đã nhập cho Clo1, Clo2 và Clo3
+            var total = clo1 + clo2 + clo3;
+
+            // Lấy ra số câu hỏi của phần hiện tại
+            var soCauHoi = parseInt($('#SoCauHoi_' + maPhan).val());
+
+            // Kiểm tra xem tổng của Clo1, Clo2, Clo3 và số câu hỏi mới có vượt quá số câu hỏi không
+            if (total > soCauHoi) {
+                var originalValue = input.getAttribute('data-original-value');
+                if (originalValue !== null) {
+                    input.value = originalValue;
+                } else {
+                    input.value = '';
+                }
+                alert("Tổng của Clo1, Clo2 và Clo3 không được vượt quá số câu hỏi.");
+            } else {
+                // Lưu trữ giá trị ban đầu của trường nhập
+                input.setAttribute('data-original-value', input.value);
+            }
+        }
+
+        // Tạo thuộc tính "data-original-value" cho các trường nhập khi trang được tải lần đầu
+        $(document).ready(function () {
+            $('.short-input').each(function () {
+                $(this).attr('data-original-value', $(this).val());
+            });
+        });
+    </script>
+
+    <script>
+        function updateSession(maPhan, property, value) {
+            $.ajax({
+                url: '@Url.Action("UpdateSession", "MaTran", new { area = "Admin" })',
+                type: 'POST',
+                data: {
+                    maPhan: maPhan,
+                    property: property,
+                    value: value
+                },
+                success: function (response) {
+                    console.log('Session updated successfully.');
+                },
+                error: function () {
+                    console.log('Error updating session.');
+                }
+            });
+        }
+    </script>
+    <script>
+        function showInput(inputId) {
+            const input = document.getElementById(inputId);
+            const label = input.previousElementSibling;
+            input.hidden = false;
+            input.focus();
+            label.hidden = true;
+        }
+
+        function hideInput(inputId) {
+            const input = document.getElementById(inputId);
+            const label = input.previousElementSibling;
+            label.textContent = input.value;
+            input.hidden = true;
+            label.hidden = false;
+        }
+    </script>
+
+}

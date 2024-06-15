@@ -1,0 +1,58 @@
+﻿@model QuestionBank.Models.CustomUser
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-header">
+                    Thông tin tài khoản
+                </div>
+                <form asp-action="Edit" class="form form-horizontal" enctype="multipart/form-data">
+                    <div class="card-body">
+                        <label asp-for="Img" class="control-label">Ảnh đại diện</label>
+                        <div class="avatar mb-3 mx-auto">
+                            <img src="~/img/User/@Model.Img" alt="Avatar" />
+                        </div>
+                        <div class="form-group">
+                            <input type="file" name="file" class="form-control" />
+                            <span asp-validation-for="Img" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="UserName">UserName</label>
+                            <input type="text" class="form-control" id="userName" asp-for="@Model.UserName" readonly></input>
+
+                        </div>
+                        <div class="form-group">
+                            <label for="address">Họ và tên</label>
+                            <input type="text" class="form-control" name="FullName" asp-for="@Model.FullName"></input>
+                            <span asp-validation-for="FullName" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="text" class="form-control" id="email" asp-for="@Model.Email" readonly></input>
+                        </div>
+                        <div class="form-group">
+                            <label for="phoneNumber">Số điện thoại</label>
+                            <input type="text" class="form-control" name="PhoneNumber" asp-for="@Model.PhoneNumber"></input>
+                            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="address">Địa chỉ</label>
+                            <input type="text" class="form-control" name="Address" asp-for="@Model.Address"></input>
+                            <span asp-validation-for="Address" class="text-danger"></span>
+                        </div>
+                        @* <div class="form-group">
+                        <label for="khoa">Khoa</label>
+                        <input type="text" class="form-control" id="khoa" asp-for="@Model.MaKHoaNavigation.TenKhoa" readonly></input>
+                        </div> *@
+                        
+                    </div>
+                    <div class="form-group">
+                        <input style="border-radius:5px" type="submit" value="Cập nhật" class="btn btn-info" />
+                    </div>
+                </form>
+            </div>
+            
+            
+        </div>
+    </div>
+</div>

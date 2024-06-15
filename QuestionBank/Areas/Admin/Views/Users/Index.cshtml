@@ -1,0 +1,58 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using QuestionBank.Models
+
+@model  IEnumerable<CustomUser>
+@inject UserManager<CustomUser> UserManager
+<div class="container-fluid" style="max-width: 1200px;">
+    <div class="content-header">
+        <h2>Danh sách người dùng</h2>
+        <a class="btn btn-primary" asp-area="Admin" asp-controller="Users" asp-action="RoleIndex">Quản lý Role</a>
+        <a class="btn btn-primary" asp-area="Identity" asp-page="/Account/Register">Đăng Ký</a>
+    </div>
+    <div class="rounded-columns">
+        <div class="row">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>Role</th>
+                        <th>Khoa</th>
+                        <th>Chức năng</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var user in Model)
+                    {
+                        <tr>
+                            <td>@user.UserName</td>
+                            <td>@user.Email</td>
+                            <td>
+                                @{
+                                    var roles = await UserManager.GetRolesAsync(user);
+                                    if (roles.Any())
+                                    {
+                                        foreach (var role in roles)
+                                        {
+                                            <text>@role</text>
+                                            <text>, </text>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <text>No role assigned</text>
+                                    }
+                                }
+                            </td>
+                            <td>@(user.MaKHoaNavigation != null ? user.MaKHoaNavigation.TenKhoa : "-")</td>
+                            <td>
+                                <a class="btn btn-primary" asp-area="Admin" asp-controller="Users" asp-action="Edit" asp-route-id="@user.Id">Sửa</a>
+                                @* <a class="btn btn-danger" asp-area="Admin" asp-controller="Users" asp-action="Delete" asp-route-id="@user.Id">Xóa</a> *@
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

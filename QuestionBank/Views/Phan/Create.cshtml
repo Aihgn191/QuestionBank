@@ -1,0 +1,55 @@
+﻿@model QuestionBank.Models.Phan
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div class="container-form">
+    <div class="header-section">
+        <h1>Tạo Phần</h1>
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col-md-12">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="form-group">
+                    <label asp-for="MaMonHoc" class="control-label">Mã Môn Học</label>
+                    <select asp-for="MaMonHoc" class="form-control" asp-items="ViewBag.MaMonHoc"></select>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="TenPhan" class="control-label">Tên Phần</label>
+                    <input asp-for="TenPhan" class="form-control" />
+                    <span asp-validation-for="TenPhan" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="NoiDung" class="control-label">Nội Dung</label>
+                    <input asp-for="NoiDung" class="form-control" />
+                    <span asp-validation-for="NoiDung" class="text-danger"></span>
+                </div>
+
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="LaCauHoiNhom" /> @Html.DisplayNameFor(model => model.LaCauHoiNhom)
+                    </label>
+                </div>
+
+                <div style="margin-top: 10px" class="form-group text-center">
+                    <input type="submit" value="Tạo" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="mt-3">
+        <a asp-action="Index" class="btn btn-secondary">Trở về</a>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,49 @@
+﻿@model IEnumerable<QuestionBank.Models.DeThi>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Danh sách đề thi</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Môn học
+            </th>
+            <th>
+                Ngày tạo
+            </th>
+            <th>
+                Đã duyệt
+            </th>
+            <th>
+                Mã môn
+            </th>
+            <th style="padding-left:80px">Chức năng</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TenDeThi)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NgayTao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DaDuyet)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaMonHocNavigation.MaMonHoc)
+            </td>
+            <td>
+                <a class="btn btn-primary"  asp-action="Details" asp-route-id="@item.MaDeThi">Xem Đề Thi</a> 
+                <a class="btn btn-primary"  asp-action="Delete" asp-route-id="@item.MaDeThi">Xóa</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
